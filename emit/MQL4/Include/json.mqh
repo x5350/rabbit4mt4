@@ -780,7 +780,8 @@ private:
          long l=0;
          long sign;
          // number
-         int i=_pos;
+         // int i=_pos; <-- BUG IF NEGATIVE NUMBER : Saran Poroong 2018-06-30 15:57 Bangkok Thailand
+         // example: -1 become 29, -110 become 2890, -123 become 2877, -1111 become 28889
 
          if(_in[_pos]=='-') 
            {
@@ -792,6 +793,8 @@ private:
               } else {
             sign=1;
            }
+           
+         int i = _pos;    // <-- Move it here fix the bug : Saran Poroong 2018-06-30 15:57 Bangkok Thailand
 
          while(i<_len && isDigit(_in[i])) 
            {
